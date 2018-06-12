@@ -12,6 +12,7 @@ $(document).ready(function () {
     var crystalNumberArray2 = [crystalNumber2];
     var crystalNumberArray3 = [crystalNumber3];
 
+    
     var counter = 0;
     var wins = 0;
     var losses = 0;
@@ -19,9 +20,7 @@ $(document).ready(function () {
     $(".number-to-guess").text("Target Number: " + targetNumber);
 
     for (var i = 0; i < crystalNumberArray.length; i++) {
-        //never changing the image 
         var purpleCrystal = $("<img>");
-        //do you want to create a new class for each img because we want the value to change each time?
         purpleCrystal.addClass("crystal");
         purpleCrystal.attr("src", "assets/images/purple_crystal.jpg");
         purpleCrystal.attr("currentValue", crystalNumberArray[i]);
@@ -54,25 +53,41 @@ $(document).ready(function () {
         crystals.append(clearCrystal1);
     }
 
+    
+    
     crystals.on("click", ".crystal", function () {
         var crystalValue = ($(this).attr("currentValue"));
         crystalValue = parseInt(crystalValue);
         counter += crystalValue;
 
 
+
+        for(var i = newTargetNumber; i == newTargetNumber; i++) {
+
         if (counter === targetNumber) {
             alert("You win!");
             wins++;
+            counter = 0;
+            var newTargetNumber =  Math.floor(Math.random() * 120) + 19;
+            targetNumber = newTargetNumber;
+            $(".number-to-guess").text("Target Number: " + targetNumber);
         }
 
         else if (counter >= targetNumber) {
             alert("You lose!!");
             losses++;
+            counter = 0;
+            var newTargetNumber =  Math.floor(Math.random() * 120) + 19;
+            targetNumber = newTargetNumber;
+            $(".number-to-guess").text("Target Number: " + targetNumber);
+
         }
 
         $(".counter").text("Current Score: " + counter);
         $(".wins").text("Wins: " + wins);
         $(".losses").text("Losses: " + losses);
-
+    
+    }
+    
     });
 });
